@@ -34,7 +34,6 @@ public class TeacherListFirstAction extends HttpServlet {
 			String id = list.get(i).getId();
 			String title = Teacher_SearchDAO.getInstance().video_selectOne(id);
 			list.get(i).setTitle(title);
-			System.out.println(id+"의 비디오:"+title);
 		}
 		
 		if(subject == "") {

@@ -263,9 +263,6 @@ public class Teacher_SearchDAO {
 				vo.setMyn("비대면 " + rs.getString("myn"));
 				vo.setProfile(rs.getString("profile"));
 				
-//				System.out.println(rs.getString("id"));
-//				String title = video_selectOne(rs.getString("id"));
-//				vo.setTitle(title);
 
 				//ArrayList추가
 				list.add(vo);
@@ -337,10 +334,6 @@ public class Teacher_SearchDAO {
 				vo.setHashtag(rs.getString("hashtag"));
 				vo.setMbti(rs.getString("mbti"));
 				vo.setMyn("비대면 " + rs.getString("myn"));
-//				System.out.println(rs.getString("id"));
-//				String title = video_selectOne(rs.getString("id"));
-//				vo.setTitle(title);
-//				System.out.println(title);
 
 				//ArrayList추가
 				list.add(vo);

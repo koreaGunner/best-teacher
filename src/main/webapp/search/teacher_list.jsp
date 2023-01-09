@@ -1614,7 +1614,6 @@ span.flag.b3 {
 			}
 			
 			function send2(id) {
-				/* f.action="TeacherInfo.do"; */
 				var p_id = id;
 				location.href="TeacherInfo.do?t_id="+p_id+"&video='video'";
 			}

@@ -116,7 +116,7 @@ public class Dialogue_listDAO {
 				vo.setRead_info(rs.getInt("read_info"));
 				vo.setLast_send_id(rs.getString("last_send_id"));
 				vo.setProfile(rs.getString("profile"));
-				vo.setAddr(rs.getString("addr"));
+				vo.setAddr(rs.getString("area"));
 				vo.setNickname(rs.getString("nickname"));
 				
 				//ArrayList추가
@@ -147,7 +147,7 @@ public class Dialogue_listDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT DISTINCT A.*, B.nickname, C.profile, C.addr, C.subject FROM TALK_LIST A, USER_TOTAL B, USER_TEACHER C, TEACHER_WISHLIST D WHERE A.student_id = ? and B.id = A.teacher_id and c.id = A.teacher_id and D.TEACHER_ID = A.TEACHER_ID ORDER BY A.READ_INFO DESC, A.LAST_SEND_DATE DESC, A.LAST_SEND_TIME DESC";
+		String sql = "select d.*, u.nickname, ut.profile, ut.area from (select rownum, 'a'||rownum r_row, A.* from (select AA.* from talk_list AA, teacher_wishlist BB where AA.student_id=? and AA.last_send_id != ? and AA.read_info = 0 and AA.teacher_id = BB.teacher_id and AA.student_id = BB.student_id order by AA.read_info DESC, AA.last_send_date DESC, AA.last_send_time DESC) A union select rownum, 'b'||rownum r_row, B.* from (select CC.* from talk_list CC, teacher_wishlist DD where CC.student_id=? and not (CC.last_send_id != ? and CC.read_info = 0) and CC.teacher_id = DD.teacher_id and CC.student_id = DD.student_id order by CC.last_send_date DESC, CC.last_send_time DESC ) B union select rownum, 'c'||rownum r_row, c.* from (select EE.* from talk_list EE, teacher_wishlist FF where EE.student_id = ? and EE.last_send_id is null and EE.teacher_id = FF.teacher_id and EE.student_id = FF.student_id order by EE.last_send_date DESC, EE.last_send_time DESC) c) d, user_total u, user_teacher ut where d.teacher_id = u.id and u.id = ut.id order by d.r_row";
 
 		try {
 			//1.Connection얻어온다
@@ -156,6 +156,10 @@ public class Dialogue_listDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			pstmt.setString(3, id);
+			pstmt.setString(4, id);
+			pstmt.setString(5, id);
 			//3.결과행 처리객체 얻어오기
 			rs = pstmt.executeQuery();
 
@@ -171,9 +175,8 @@ public class Dialogue_listDAO {
 				vo_w.setRead_info(rs.getInt("read_info"));
 				vo_w.setLast_send_id(rs.getString("last_send_id"));
 				vo_w.setProfile(rs.getString("profile"));
-				vo_w.setAddr(rs.getString("addr"));
+				vo_w.setAddr(rs.getString("area"));
 				vo_w.setNickname(rs.getString("nickname"));
-				vo_w.setSubject(rs.getString("subject"));
 				
 				//ArrayList추가
 				wish_list.add(vo_w);

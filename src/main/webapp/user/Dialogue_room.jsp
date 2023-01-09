@@ -384,7 +384,7 @@
 //상대방 정보보기===========================================================================================	
 	function user_info(){
 		var your_gubun = "${msg_list.gubun}";
-		alert(your_gubun);
+		
 		
 		if(your_gubun == "학생"){
 			var s_id = "${msg_list.student_id}";
