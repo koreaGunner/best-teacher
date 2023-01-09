@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+header{
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	background: rgba(0,0,0,0.6);
+	z-index: 100;
+}
+
+header nav ul{
+	display: flex;
+	justify-content: center;
+}
+
+header nav ul li{
+	margin:0 20px;
+	list-style: none;
+}
